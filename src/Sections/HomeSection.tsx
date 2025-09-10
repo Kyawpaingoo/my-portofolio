@@ -2,8 +2,13 @@ import * as React from "react";
 import myPhoto from '../assets/img/my-photo.jpg';
 import TypewriterText from "../Components/TypewriterText.tsx";
 import { Download, Github, Linkedin, Mail, MessageCircle} from "lucide-react";
+import {pdfFile, type SectionKey} from "../Data.ts";
 
-const HomeSection: React.FC = () => {
+interface HomeSectionProps {
+    onSectionChange: (section: SectionKey) => void;
+}
+
+const HomeSection: React.FC<HomeSectionProps> = ({onSectionChange}) => {
     return (
         <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100
             dark:from-gray-900 dark:to-gray-800">
@@ -21,11 +26,13 @@ const HomeSection: React.FC = () => {
                         Currently exploring the world while building amazing digital experiences.
                     </p>
                     <div className='flex flex-col sm:flex-row gap-4 justify-center'>
-                        <button className='bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2 shadow-lg'>
+                        <a href={pdfFile} className='bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2 shadow-lg' download>
                             <Download className='w-5 h-5' />
                             <span>Download CV</span>
-                        </button>
-                        <button className='border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2'>
+                        </a>
+                        <button className='border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2'
+                            onClick={() => onSectionChange('contact')}
+                        >
                             <MessageCircle className='w-5 h-5' />
                             <span>Let's Talk</span>
                         </button>

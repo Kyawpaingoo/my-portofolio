@@ -1,4 +1,4 @@
-import React, {type ReactElement, useState} from 'react'
+import React, {type ReactElement, useEffect, useRef, useState} from 'react'
 import type {SectionKey} from "./Data.ts";
 import useTheme from "./Hook/useTheme.tsx";
 import HomeSection from "./Sections/HomeSection.tsx";
@@ -14,18 +14,61 @@ const App: React.FC = () => {
     const [activeSection, setActiveSection] = useState<SectionKey>('home')
     const themeValue = useTheme();
 
+    const sectionRefs = useRef<Record<SectionKey, HTMLDivElement | null>>({
+        home: null,
+        about: null,
+        skills: null,
+        projects: null,
+        experience: null,
+        contact: null,
+    })
 
-    const sections: Record<string, ReactElement> = {
-        home: <HomeSection />,
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollPosition = window.scrollY + 100;
+
+            const sectionKeys = Object.keys(sectionRefs.current) as SectionKey[];
+
+            for(let i = sectionKeys.length - 1; i >= 0; i--) {
+                const sectionKey = sectionKeys[i];
+                const element = sectionRefs.current[sectionKey];
+
+                if(element && element.offsetTop <= scrollPosition) {
+                    setActiveSection(sectionKey);
+                    break;
+                }
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        handleScroll();
+
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    const handleSectionChange = (section: SectionKey): void => {
+        setActiveSection(section)
+        const element = sectionRefs.current[section];
+        if (element) {
+            const offsetTop = element.offsetTop - 80;
+            window.scrollTo({
+                top: offsetTop,
+                behavior: 'smooth'
+            });
+        }
+    }
+
+    const setSectionRef = (sectionKey: SectionKey) => (el: HTMLDivElement | null) => {
+        sectionRefs.current[sectionKey] = el;
+    };
+
+    const sections: Record<SectionKey, ReactElement> = {
+        home: <HomeSection onSectionChange={handleSectionChange} />,
         about: <AboutSection />,
         skills: <SkillSection />,
         projects: <ProjectsSection />,
         experience: <ExperienceSection />,
         contact: <ContactSection />,
-    }
-
-    const handleSectionChange = (section: SectionKey): void => {
-        setActiveSection(section)
     }
 
     return (
@@ -35,7 +78,24 @@ const App: React.FC = () => {
                 <Navbar activeSection={activeSection} onSectionChange={handleSectionChange} />
 
                 <main className="pt-16">
-                    {sections[activeSection]}
+                    <div ref={setSectionRef('home')} id='home'>
+                        {sections.home}
+                    </div>
+                    <div ref={setSectionRef('about')} id='about'>
+                        {sections.about}
+                    </div>
+                    <div ref={setSectionRef('skills')} id='skills'>
+                        {sections.skills}
+                    </div>
+                    <div ref={setSectionRef('projects')} id='projects'>
+                        {sections.projects}
+                    </div>
+                    <div ref={setSectionRef('experience')} id='experience'>
+                        {sections.experience}
+                    </div>
+                    <div ref={setSectionRef('contact')} id='contact'>
+                        {sections.contact}
+                    </div>
                 </main>
 
                 <footer className="bg-gray-900 dark:bg-gray-800 text-white py-8">

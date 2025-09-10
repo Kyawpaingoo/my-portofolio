@@ -42,13 +42,18 @@ const ProjectsSection: React.FC = () => {
                                        ))}
                                    </div>
                                    <div className="flex space-x-4">
-                                       <a
-                                           href={project.liveLink}
-                                           className="flex items-center space-x-1 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors"
-                                       >
-                                           <ExternalLink className="w-4 h-4" />
-                                           <span>Live Demo</span>
-                                       </a>
+                                       {
+                                           project.liveLink != null && (
+                                               <a
+                                                   href={project.liveLink}
+                                                   className="flex items-center space-x-1 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors"
+                                               >
+                                                   <ExternalLink className="w-4 h-4" />
+                                                   <span>Live Demo</span>
+                                               </a>
+                                           )
+                                       }
+
                                        <a
                                            href={project.githubLink}
                                            className="flex items-center space-x-1 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-300 transition-colors"

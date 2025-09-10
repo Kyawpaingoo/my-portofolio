@@ -33,7 +33,7 @@ export type projectType = {
     title: string,
     description: string,
     technologies: string[],
-    liveLink: string,
+    liveLink: string | null,
     githubLink: string,
     image: string,
 }
@@ -60,13 +60,13 @@ export const skillCategories: skillCategoryType[] = [
     {
         title: 'Frontend',
         icon: Code2,
-        skills: ['React', 'TypeScript', 'Material UI', 'Blazor', 'Bootstrap', 'Tailwind CSS', 'JavaScript', 'HTML5', 'CSS3'],
+        skills: ['React', 'React Native', 'TypeScript', 'Material UI', 'Blazor', 'Bootstrap', 'Tailwind CSS', 'JavaScript', 'HTML5', 'CSS3'],
         color: 'text-blue-600 dark:text-blue-400'
     },
     {
         title: 'Backend',
         icon: Server,
-        skills: ['C#', 'ASP.NET Core', 'Entity Framework', 'Node.js', 'Express.js', 'Go (Basic)', 'REST APIs'],
+        skills: ['C#', 'ASP.NET Core', 'Entity Framework', 'Node.js', 'Express.js', 'NestJS', 'Python', 'Go (Basic)', 'REST APIs'],
         color: 'text-green-600 dark:text-green-400'
     },
     {
@@ -85,44 +85,55 @@ export const skillCategories: skillCategoryType[] = [
 
 export const projects: projectType[] = [
     {
-        title: 'Blog CRUD App',
-        description: 'Full-stack blog application with create, read, update, and delete functionality.',
-        technologies: ['React', 'Node.js', 'MongoDB', 'Express'],
-        liveLink: '#',
-        githubLink: '#',
+        title: 'Productivity Dashboard',
+        description: 'Digital Nomad focused Productivity Dashboard with Kanban Board, Expense Tracker, Visa Tracking ' +
+            'System, Meeting Scheduler and Real-time Notification',
+        technologies: ['React', 'TypeScript', 'Material UI', 'React-Query', 'Web Socket'],
+        liveLink: null,
+        githubLink: 'https://github.com/Kyawpaingoo/normad-focus-web',
         image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=250&fit=crop&auto=format'
+    },
+    {
+        title: 'Productivity Dashboard API',
+        description: 'RESTful API services for nomad focus productivity app using Node.JS and Express.js. ' +
+            'Implemented Pagination, Kanban Board Group and Infinite Scroll DTOs for efficient data handling. ' +
+            'Currently migrating into NestJS.',
+        technologies: ['Node.js', 'Express', 'PostgresSQL', 'Prisma-ORM'],
+        liveLink: null,
+        githubLink: 'https://github.com/Kyawpaingoo/normad-focus-express-api',
+        image: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=250&fit=crop&auto=format'
+    },
+    {
+        title: 'Go Push Notification API',
+        description: 'Golang-based real time push notification API for nomad focus productivity app with web socket.',
+        technologies: ['Go', 'REST API', 'Web Socket', 'JSON', 'HTTP Server'],
+        liveLink: null,
+        githubLink: 'https://github.com/Kyawpaingoo/normad-focus-go-ultils-api',
+        image: 'https://i.pinimg.com/1200x/b2/a2/3f/b2a23fffbd695d21afec83d0c9610673.jpg'
     },
     {
         title: 'Social App',
         description: 'Modern social media application with real-time features and optimistic updates.',
-        technologies: ['TypeScript', 'React Query', 'Prisma', 'PostgreSQL'],
-        liveLink: '#',
-        githubLink: '#',
-        image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=250&fit=crop&auto=format'
+        technologies: ['TypeScript', 'React Query', 'Prisma', 'PostgresSQL'],
+        liveLink: null,
+        githubLink: 'https://github.com/Kyawpaingoo/Social-Project',
+        image: 'https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     },
     {
         title: 'Dev Portfolio API',
         description: 'RESTful API for developer portfolios with GitHub integration and CI/CD pipeline.',
         technologies: ['Express.js', 'GitHub API', 'Neon', 'GitHub Actions'],
-        liveLink: '#',
-        githubLink: '#',
-        image: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=250&fit=crop&auto=format'
+        liveLink: null,
+        githubLink: 'https://github.com/SFU-IT-Club/ITClubWeb',
+        image: 'https://images.unsplash.com/photo-1629904853716-f0bc54eea481?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     },
     {
         title: 'Movie Watchlist',
-        description: 'Mobile app for tracking movies and managing personal watchlists.',
-        technologies: ['React Native', 'TypeScript', 'SQLite', 'REST API'],
-        liveLink: '#',
-        githubLink: '#',
-        image: 'https://images.unsplash.com/photo-1489599150050-48b4b5b0e8cb?w=400&h=250&fit=crop&auto=format'
-    },
-    {
-        title: 'Go Wallet API',
-        description: 'Golang-based wallet API with mock data simulation and financial operations.',
-        technologies: ['Go', 'REST API', 'JSON', 'HTTP Server'],
-        liveLink: '#',
-        githubLink: '#',
-        image: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=400&h=250&fit=crop&auto=format'
+        description: 'Mobile app for tracking movies and managing personal watchlist.',
+        technologies: ['React Native', 'JavaScript', 'Expo'],
+        liveLink: null,
+        githubLink: 'https://github.com/Kyawpaingoo/movie-app',
+        image: 'https://i.pinimg.com/736x/fb/af/f5/fbaff54cb503d9f092976eab24d1eed3.jpg'
     }
 ];
 
@@ -150,8 +161,10 @@ export const experiences: experienceType[] = [
     },
 ]
 
+export const pdfFile = "/files/Kyaw_Paing_Oo_Resume.pdf"
 
 export const typeWriterItems: string[] = [
     'Full Stack Developer',
-    'Digital Nomad'
+    'Digital Nomad',
+    'AI Enthusiast'
 ]

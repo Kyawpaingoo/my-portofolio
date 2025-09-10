@@ -57,13 +57,13 @@ const ContactSection: React.FC = () => {
                                 Follow Me
                             </h4>
                             <div className="flex space-x-4">
-                                <a href="#" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                                <a href="https://github.com/Kyawpaingoo" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                                     <Github className="w-6 h-6" />
                                 </a>
-                                <a href="#" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                                <a href="www.linkedin.com/in/kyaw-paing-oo-dev" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                                     <Linkedin className="w-6 h-6" />
                                 </a>
-                                <a href="#" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                                <a href="mailto:paingookyaw624@gmail.com" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                                     <Mail className="w-6 h-6" />
                                 </a>
                             </div>
