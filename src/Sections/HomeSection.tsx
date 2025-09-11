@@ -41,7 +41,7 @@ const HomeSection: React.FC<HomeSectionProps> = ({onSectionChange}) => {
                         <a href="https://github.com/Kyawpaingoo" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                             <Github className="w-6 h-6" />
                         </a>
-                        <a href="www.linkedin.com/in/kyaw-paing-oo-dev" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                        <a href="https://www.linkedin.com/in/kyaw-paing-oo-dev" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                             <Linkedin className="w-6 h-6" />
                         </a>
                         <a href="mailto:paingookyaw624@gmail.com" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
