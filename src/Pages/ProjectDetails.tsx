@@ -9,6 +9,7 @@ import {
 const ProjectDetails: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const project = projects.find(p => p.id === Number(id));
+    const devPortolio = 'src/assets/img/dev-portfolio.png';
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -36,7 +37,7 @@ const ProjectDetails: React.FC = () => {
                         <div className="relative group">
                             <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
                             <img 
-                                src={project.image} 
+                                src={(project.id === 2 ? devPortolio : project.image)} 
                                 alt={project.title} 
                                 className="relative rounded-xl shadow-2xl w-full object-cover aspect-video"
                             />

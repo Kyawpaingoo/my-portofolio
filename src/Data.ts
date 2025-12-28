@@ -11,6 +11,7 @@ import {
     User
 } from "lucide-react";
 import React from "react";
+import devPortfolio from './assets/img/dev-portfolio.jpg';
 
 export type Theme = 'light' | 'dark';
 
@@ -124,7 +125,7 @@ export const projects: projectType[] = [
         ],
         liveLink: null, // Add if you have one
         githubLink: 'https://github.com/Kyawpaingoo/portfolio-builder', // Replace with actual link
-        image: '../src/assets/img/dev-portfolio.png' // Replace with an actual screenshot of the editor
+        image: devPortfolio // Replace with an actual screenshot of the editor
     },
     
     // {
