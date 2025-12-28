@@ -26,9 +26,13 @@ const HomeSection: React.FC<HomeSectionProps> = ({onSectionChange}) => {
                         Currently exploring the world while building amazing digital experiences.
                     </p>
                     <div className='flex flex-col sm:flex-row gap-4 justify-center'>
-                        <a href={pdfFile} className='bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2 shadow-lg' download>
+                        {/* <a href={pdfFile} className='bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2 shadow-lg' download>
                             <Download className='w-5 h-5' />
                             <span>Download CV</span>
+                        </a> */}
+                        <a href="mailto:paingookyaw624@gmail.com" className='bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2 shadow-lg'>
+                            <Mail className="w-6 h-6" />
+                            <span>Send Email</span>
                         </a>
                         <button className='border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2'
                             onClick={() => onSectionChange('contact')}

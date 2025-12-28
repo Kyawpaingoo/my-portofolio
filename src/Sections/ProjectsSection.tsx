@@ -1,6 +1,7 @@
 import * as React from "react";
 import {projects, type projectType} from "../Data.ts";
-import {ExternalLink, Github} from "lucide-react";
+import {ExternalLink, Eye} from "lucide-react";
+import { Link } from 'react-router-dom';
 
 const ProjectsSection: React.FC = () => {
     return (
@@ -15,7 +16,7 @@ const ProjectsSection: React.FC = () => {
                    </p>
                </div>
 
-               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
                    {
                        projects.map((project: projectType, index: number) => (
                            <div key={index} className="bg-gray-50 dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
@@ -53,14 +54,21 @@ const ProjectsSection: React.FC = () => {
                                                </a>
                                            )
                                        }
+                                        <Link
+                                          to={`/project/${project.id}`}
+                                           className="flex items-center space-x-1 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-300 transition-colors"
+                                       >
+                                           <Eye className="w-4 h-4" />
+                                           <span>View More</span>
+                                       </Link>
 
-                                       <a
+                                       {/* <a
                                            href={project.githubLink}
                                            className="flex items-center space-x-1 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-300 transition-colors"
                                        >
                                            <Github className="w-4 h-4" />
                                            <span>Code</span>
-                                       </a>
+                                       </a> */}
                                    </div>
                                </div>
                            </div>

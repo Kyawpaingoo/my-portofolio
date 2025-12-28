@@ -30,11 +30,15 @@ export type skillCategoryType = {
 }
 
 export type projectType = {
+    id: number,
     title: string,
     description: string,
     technologies: string[],
+    keyFeatures?: string[],
+    technicalHighlights?: string,
+    ecosystem?: string,
     liveLink: string | null,
-    githubLink: string,
+    githubLink?: string,
     image: string,
 }
 
@@ -85,56 +89,53 @@ export const skillCategories: skillCategoryType[] = [
 
 export const projects: projectType[] = [
     {
-        title: 'Productivity Dashboard',
-        description: 'Digital Nomad focused Productivity Dashboard with Kanban Board, Expense Tracker, Visa Tracking ' +
-            'System, Meeting Scheduler and Real-time Notification',
-        technologies: ['React', 'TypeScript', 'Material UI', 'React-Query', 'Web Socket'],
+        id: 1,
+        title: 'NomadFocus: An Integrated Productivity Ecosystem for Digital Nomads',
+        description: `NomadFocus is a high-performance, full-stack productivity suite designed specifically for the lifestyle of digital nomads. It bridges the gap between task management and travel logistics by integrating a specialized Visa Tracking system alongside traditional productivity tools.`,
+        ecosystem: 'Built using a decoupled architecture featuring a React frontend, a Node.js/Express core REST API, and a specialized Golang service for low-latency real-time communication.',
+        keyFeatures: ['Dynamic Kanban Board with infinite scroll and optimized DTOs.', 'Integrated Expense Tracker and Meeting Scheduler.', 'Automated Visa Tracking system.', 'Real-time updates with WebSocket integration.'],
+        technicalHighlights: 'Implemented efficient data handling with Pagination and Prisma ORM. Currently undergoing a strategic migration of the core API from Express to NestJS to enhance scalability and maintainability.',
+        technologies: ['React', 'TypeScript', 'Material UI', 'React-Query', 'Web Socket', 'Node.js', 'Express', 'PostgresSQL', 'Prisma-ORM', 'Golang'],
         liveLink: null,
         githubLink: 'https://github.com/Kyawpaingoo/normad-focus-web',
         image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=250&fit=crop&auto=format'
     },
     {
-        title: 'Productivity Dashboard API',
-        description: 'RESTful API services for nomad focus productivity app using Node.JS and Express.js. ' +
-            'Implemented Pagination, Kanban Board Group and Infinite Scroll DTOs for efficient data handling. ' +
-            'Currently migrating into NestJS.',
-        technologies: ['Node.js', 'Express', 'PostgresSQL', 'Prisma-ORM'],
+        id: 2,
+        title: 'Sure Benefit Admin Dashboard',
+        description: `Sure Benefit is a administrative platform designed to orchestrate a high-traffic loyalty ecosystem. It serves as the central "brain" for a reward and discount application, enabling administrators to manage complex point economies, member hierarchies, and real-time user engagement strategies. It is a unified solution that integrates various facets of loyalty program management into a single, efficient interface.`,
+        ecosystem: 'Built to handle data-intensive operations, the system features a robust management layer that interfaces with a multi-tier member application.',
+        keyFeatures: ['Admin Dashboard for managing loyalty programs.', 'Real-time analytics and reporting.', 'Multi-tier member hierarchy management.', 'Automated reward distribution system.'],
+        technicalHighlights: 'Implemented a robust backend using C# and ASP.NET with Blazor for the frontend. Integrated Hangfire for background job processing and Azure for cloud deployment.',
+        technologies: ['C#', 'Blazor', 'ASP.NET', 'Microsoft SQL Server', 'Azure', 'Hangfire'],
         liveLink: null,
-        githubLink: 'https://github.com/Kyawpaingoo/normad-focus-express-api',
-        image: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=250&fit=crop&auto=format'
+        image: '../src/assets/img/isure.logo.png'
     },
-    {
-        title: 'Go Push Notification API',
-        description: 'Golang-based real time push notification API for nomad focus productivity app with web socket.',
-        technologies: ['Go', 'REST API', 'Web Socket', 'JSON', 'HTTP Server'],
-        liveLink: null,
-        githubLink: 'https://github.com/Kyawpaingoo/normad-focus-go-ultils-api',
-        image: 'https://i.pinimg.com/1200x/b2/a2/3f/b2a23fffbd695d21afec83d0c9610673.jpg'
-    },
-    {
-        title: 'Social App',
-        description: 'Modern social media application with real-time features and optimistic updates.',
-        technologies: ['TypeScript', 'React Query', 'Prisma', 'PostgresSQL'],
-        liveLink: null,
-        githubLink: 'https://github.com/Kyawpaingoo/Social-Project',
-        image: 'https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-    },
-    {
-        title: 'Dev Portfolio API',
-        description: 'RESTful API for developer portfolios with GitHub integration and CI/CD pipeline.',
-        technologies: ['Express.js', 'GitHub API', 'Neon', 'GitHub Actions'],
-        liveLink: null,
-        githubLink: 'https://github.com/SFU-IT-Club/ITClubWeb',
-        image: 'https://images.unsplash.com/photo-1629904853716-f0bc54eea481?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-    },
-    {
-        title: 'Movie Watchlist',
-        description: 'Mobile app for tracking movies and managing personal watchlist.',
-        technologies: ['React Native', 'JavaScript', 'Expo'],
-        liveLink: null,
-        githubLink: 'https://github.com/Kyawpaingoo/movie-app',
-        image: 'https://i.pinimg.com/736x/fb/af/f5/fbaff54cb503d9f092976eab24d1eed3.jpg'
-    }
+    
+    // {
+    //     title: 'Social App',
+    //     description: 'Modern social media application with real-time features and optimistic updates.',
+    //     technologies: ['TypeScript', 'React Query', 'Prisma', 'PostgresSQL'],
+    //     liveLink: null,
+    //     githubLink: 'https://github.com/Kyawpaingoo/Social-Project',
+    //     image: 'https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+    // },
+    // {
+    //     title: 'Dev Portfolio API',
+    //     description: 'RESTful API for developer portfolios with GitHub integration and CI/CD pipeline.',
+    //     technologies: ['Express.js', 'GitHub API', 'Neon', 'GitHub Actions'],
+    //     liveLink: null,
+    //     githubLink: 'https://github.com/SFU-IT-Club/ITClubWeb',
+    //     image: 'https://images.unsplash.com/photo-1629904853716-f0bc54eea481?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+    // },
+    // {
+    //     title: 'Movie Watchlist',
+    //     description: 'Mobile app for tracking movies and managing personal watchlist.',
+    //     technologies: ['React Native', 'JavaScript', 'Expo'],
+    //     liveLink: null,
+    //     githubLink: 'https://github.com/Kyawpaingoo/movie-app',
+    //     image: 'https://i.pinimg.com/736x/fb/af/f5/fbaff54cb503d9f092976eab24d1eed3.jpg'
+    // }
 ];
 
 export const experiences: experienceType[] = [
