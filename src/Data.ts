@@ -101,15 +101,30 @@ export const projects: projectType[] = [
         image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=250&fit=crop&auto=format'
     },
     {
-        id: 2,
-        title: 'Sure Benefit Admin Dashboard',
-        description: `Sure Benefit is a administrative platform designed to orchestrate a high-traffic loyalty ecosystem. It serves as the central "brain" for a reward and discount application, enabling administrators to manage complex point economies, member hierarchies, and real-time user engagement strategies. It is a unified solution that integrates various facets of loyalty program management into a single, efficient interface.`,
-        ecosystem: 'Built to handle data-intensive operations, the system features a robust management layer that interfaces with a multi-tier member application.',
-        keyFeatures: ['Admin Dashboard for managing loyalty programs.', 'Real-time analytics and reporting.', 'Multi-tier member hierarchy management.', 'Automated reward distribution system.'],
-        technicalHighlights: 'Implemented a robust backend using C# and ASP.NET with Blazor for the frontend. Integrated Hangfire for background job processing and Azure for cloud deployment.',
-        technologies: ['C#', 'Blazor', 'ASP.NET', 'Microsoft SQL Server', 'Azure', 'Hangfire'],
-        liveLink: null,
-        image: '../src/assets/img/isure.logo.png'
+        id: 3, // Adjust ID as needed
+        title: 'DevCanvas: A Block-Based Headless CMS for Developer Portfolios',
+        description: `DevCanvas is a specialized, full-stack Content Management System designed to empower developers to build and manage high-fidelity portfolios without touching raw HTML. It moves beyond traditional static site generators by offering a dynamic, Notion-style editing experience, allowing users to construct complex project narratives through intuitive drag-and-drop content blocks.`,
+        ecosystem: 'Architected using the Next.js 14 App Router for a hybrid rendering approach (combining server-side SEO benefits with client-side interactivity). It utilizes a serverless API backend layer managed by Prisma ORM, with secure, multi-strategy authentication via NextAuth.js.',
+        keyFeatures: [
+            'Hybrid Authentication (Email magic links + Google OAuth integration).',
+            'Granular visibility controls for public vs. private portfolio instances.',
+            'SEO-optimized public rendering layer with dynamic metadata.',
+            'Intuitive project organization with drag-and-drop reordering capabilities.'
+        ],
+        technicalHighlights: 'The core engineering challenge was developing the custom block-based WYSIWYG editor. It leverages advanced drag-and-drop primitives (dnd-kit) to manage complex, mutable data structures in real-time. The editor supports diverse content schema—including rich text, syntax-highlighted code snippets, and asynchronous GitHub repository embeds—all type-safe via rigorous TypeScript implementation from database to UI.',
+        technologies: [
+            'Next.js 14 (App Router)',
+            'TypeScript',
+            'Tailwind CSS',
+            'Prisma ORM',
+            'SQLite (Swappable)',
+            'NextAuth.js',
+            'DnD Kit',
+            'UploadThing'
+        ],
+        liveLink: null, // Add if you have one
+        githubLink: 'https://github.com/Kyawpaingoo/portfolio-builder', // Replace with actual link
+        image: '../src/assets/img/dev-portfolio.png' // Replace with an actual screenshot of the editor
     },
     
     // {
@@ -139,6 +154,14 @@ export const projects: projectType[] = [
 ];
 
 export const experiences: experienceType[] = [
+    {
+        title: 'Freelance Full Stack Developer',
+        company: 'Self-Employed',
+        period: '2024 June - Present',
+        type: 'Remote',
+        description: 'Collaborated with clients to develop and maintain web applications using modern technologies. Delivered end-to-end solutions from frontend design to backend development and deployment. Ensured responsive design and optimal performance across devices.',
+        technologies: ['React', 'TypeScript', 'Node.js', 'Express', 'PostgresSQL', 'AWS']
+    },
     {
         title: 'Software Engineer',
         company: 'Yammobots',
