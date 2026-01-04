@@ -102,7 +102,7 @@ export const projects: projectType[] = [
         image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=250&fit=crop&auto=format'
     },
     {
-        id: 3, // Adjust ID as needed
+        id: 2, // Adjust ID as needed
         title: 'DevCanvas: A Block-Based Headless CMS for Developer Portfolios',
         description: `DevCanvas is a specialized, full-stack Content Management System designed to empower developers to build and manage high-fidelity portfolios without touching raw HTML. It moves beyond traditional static site generators by offering a dynamic, Notion-style editing experience, allowing users to construct complex project narratives through intuitive drag-and-drop content blocks.`,
         ecosystem: 'Architected using the Next.js 14 App Router for a hybrid rendering approach (combining server-side SEO benefits with client-side interactivity). It utilizes a serverless API backend layer managed by Prisma ORM, with secure, multi-strategy authentication via NextAuth.js.',
@@ -155,14 +155,14 @@ export const projects: projectType[] = [
 ];
 
 export const experiences: experienceType[] = [
-    {
-        title: 'Freelance Full Stack Developer',
-        company: 'Self-Employed',
-        period: '2024 June - Present',
-        type: 'Remote',
-        description: 'Collaborated with clients to develop and maintain web applications using modern technologies. Delivered end-to-end solutions from frontend design to backend development and deployment. Ensured responsive design and optimal performance across devices.',
-        technologies: ['React', 'TypeScript', 'Node.js', 'Express', 'PostgresSQL', 'AWS']
-    },
+    // {
+    //     title: 'Freelance Full Stack Developer',
+    //     company: 'Self-Employed',
+    //     period: '2024 June - Present',
+    //     type: 'Remote',
+    //     description: 'Collaborated with clients to develop and maintain web applications using modern technologies. Delivered end-to-end solutions from frontend design to backend development and deployment. Ensured responsive design and optimal performance across devices.',
+    //     technologies: ['React', 'TypeScript', 'Node.js', 'Express', 'PostgresSQL', 'AWS']
+    // },
     {
         title: 'Software Engineer',
         company: 'Yammobots',
