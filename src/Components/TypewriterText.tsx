@@ -1,38 +1,49 @@
-import {useState,useEffect} from "react";
-import * as React from "react";
+import { useState, useEffect } from 'react'
 
-const TypewriterText: React.FC<{ texts: string[] }> = ({ texts }) => {
-    const [currentText, setCurrentText] = useState('');
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [isDeleting, setIsDeleting] = useState(false);
+interface TypewriterTextProps {
+  texts: string[]
+  typingSpeed?: number
+  deletingSpeed?: number
+  pauseDuration?: number
+}
 
-    useEffect(() => {
-        const timeout = setTimeout(() => {
-            const fullText = texts[currentIndex];
+export default function TypewriterText({
+  texts,
+  typingSpeed = 100,
+  deletingSpeed = 50,
+  pauseDuration = 2000
+}: TypewriterTextProps) {
+  const [displayText, setDisplayText] = useState('')
+  const [textIndex, setTextIndex] = useState(0)
+  const [isDeleting, setIsDeleting] = useState(false)
 
-            if (isDeleting) {
-                setCurrentText(fullText.substring(0, currentText.length - 1));
-                if (currentText === '') {
-                    setIsDeleting(false);
-                    setCurrentIndex((prev) => (prev + 1) % texts.length);
-                }
-            } else {
-                setCurrentText(fullText.substring(0, currentText.length + 1));
-                if (currentText === fullText) {
-                    setTimeout(() => setIsDeleting(true), 2000);
-                }
-            }
-        }, isDeleting ? 50 : 100);
+  useEffect(() => {
+    const currentText = texts[textIndex]
+    
+    const timeout = setTimeout(() => {
+      if (!isDeleting) {
+        if (displayText.length < currentText.length) {
+          setDisplayText(currentText.slice(0, displayText.length + 1))
+        } else {
+          setTimeout(() => setIsDeleting(true), pauseDuration)
+        }
+      } else {
+        if (displayText.length > 0) {
+          setDisplayText(displayText.slice(0, -1))
+        } else {
+          setIsDeleting(false)
+          setTextIndex((prev) => (prev + 1) % texts.length)
+        }
+      }
+    }, isDeleting ? deletingSpeed : typingSpeed)
 
-        return () => clearTimeout(timeout);
-    }, [currentText, currentIndex, isDeleting, texts]);
+    return () => clearTimeout(timeout)
+  }, [displayText, isDeleting, textIndex, texts, typingSpeed, deletingSpeed, pauseDuration])
 
-    return (
-        <span className="text-blue-600 dark:text-blue-400">
-      {currentText}
-            <span className="animate-pulse">|</span>
+  return (
+    <span className="inline-block">
+      {displayText}
+      <span className="animate-pulse">|</span>
     </span>
-    );
-};
-
-export default TypewriterText;
+  )
+}
