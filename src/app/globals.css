@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-bg text-text font-sans;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+  }
+
+  :focus-visible {
+    outline: 2px solid theme("colors.accent.DEFAULT");
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .dotted-bg {
+    position: relative;
+    background-image: radial-gradient(
+      circle,
+      rgba(45, 212, 191, 0.15) 1px,
+      transparent 1px
+    );
+    background-size: 24px 24px;
+  }
+
+  .dotted-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: radial-gradient(
+      circle,
+      rgba(45, 212, 191, 0.9) 1.5px,
+      transparent 1.5px
+    );
+    background-size: 24px 24px;
+    -webkit-mask-image: radial-gradient(
+      circle 180px at var(--x, -9999px) var(--y, -9999px),
+      black 0%,
+      transparent 100%
+    );
+    mask-image: radial-gradient(
+      circle 180px at var(--x, -9999px) var(--y, -9999px),
+      black 0%,
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .dotted-bg::after {
+      display: none;
+    }
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #30363d transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #30363d;
+    border-radius: 3px;
+  }
+}
