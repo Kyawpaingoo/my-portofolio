@@ -224,7 +224,8 @@ card fields, carried over from the old site's meta tags (see old
 
 - SureBenefits public URL (currently a placeholder `#` — needs the real link)
 - CoLive GitHub repo URL — confirm it's public before linking
-- Final decision on deployed domain (`kyawpaingoo.dev` vs the existing
-  `kyawpaingoo-dev.vercel.app`) — affects `metadataBase` in `layout.tsx`
+- ~~Final decision on deployed domain~~ — resolved: using
+  `kyawpaingoo-dev.vercel.app` (`metadataBase` in `layout.tsx`, sitemap.xml,
+  robots.txt updated)
 - EmailJS service/template/public key — needed in `.env.local` for the
   contact form to actually send mail instead of falling back to `mailto:`
