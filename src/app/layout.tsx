@@ -22,7 +22,7 @@ const description =
   "Full Stack Developer from Myanmar specializing in React, Node.js, .NET, and cloud services. Building scalable web applications as a digital nomad.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://kyawpaingoo.dev"),
+  metadataBase: new URL("https://kyawpaingoo-dev.vercel.app"),
   title,
   description,
   authors: [{ name: "Kyaw Paing Oo" }],
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
-    url: "https://kyawpaingoo.dev/",
+    url: "https://kyawpaingoo-dev.vercel.app/",
     title,
     description,
     images: ["/og-image.png"],
@@ -76,7 +76,7 @@ const jsonLd = {
   "@type": "Person",
   name: "Kyaw Paing Oo",
   alternateName: "Kelvin",
-  url: "https://kyawpaingoo.dev",
+  url: "https://kyawpaingoo-dev.vercel.app",
   image: "/og-image.png",
   jobTitle: "Full Stack Developer",
   worksFor: {
