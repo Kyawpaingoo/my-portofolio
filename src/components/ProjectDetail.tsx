@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import type { Project } from "@/lib/data";
+import HighlightText from "./HighlightText";
 
 export default function ProjectDetail({ project }: { project: Project }) {
   return (
@@ -30,19 +31,42 @@ export default function ProjectDetail({ project }: { project: Project }) {
           </h1>
 
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-text/90">
-            {project.description}
+            <HighlightText text={project.description} keywords={project.keywords} />
           </p>
 
-          <ul className="mt-6 flex flex-wrap gap-2">
-            {project.stack.map((tech) => (
-              <li
-                key={tech}
-                className="rounded-full border border-border px-3 py-1 font-mono text-xs text-muted"
-              >
-                {tech}
-              </li>
-            ))}
-          </ul>
+          {project.stack.length > 0 && (
+            <div className="mt-6">
+              <h2 className="font-mono text-xs uppercase tracking-wide text-muted">
+                Tech Stack
+              </h2>
+              <ul className="mt-3 flex flex-wrap gap-2">
+                {project.stack.map((tech) => (
+                  <li
+                    key={tech}
+                    className="rounded-full border border-border px-3 py-1 font-mono text-xs text-muted"
+                  >
+                    {tech}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {project.highlights.length > 0 && (
+            <ul className="mt-8 space-y-3">
+              {project.highlights.map((highlight) => (
+                <li
+                  key={highlight}
+                  className="flex gap-3 text-sm leading-relaxed text-text/90"
+                >
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                  <span>
+                    <HighlightText text={highlight} keywords={project.keywords} />
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
 
           {project.githubUrl && (
             <a

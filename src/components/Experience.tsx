@@ -22,7 +22,7 @@ const card = {
 
 export default function Experience() {
   return (
-    <section id="experience" className="dotted-bg">
+    <section id="experience" className="dotted-bg border-t border-border">
       <div className="mx-auto max-w-5xl px-6 py-20">
         <motion.p
           initial={{ opacity: 0, y: 12 }}

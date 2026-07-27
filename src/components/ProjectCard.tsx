@@ -10,6 +10,7 @@ import {
 } from "motion/react";
 import { ExternalLink } from "lucide-react";
 import type { Project } from "@/lib/data";
+import HighlightText from "./HighlightText";
 
 export default function ProjectCard({
   project,
@@ -68,7 +69,7 @@ export default function ProjectCard({
           {project.category}
         </p>
         <p className="mt-4 text-sm leading-relaxed text-text/90">
-          {project.description}
+          <HighlightText text={project.description} keywords={project.keywords} />
         </p>
         <ul className="mt-5 flex flex-wrap gap-2">
           {project.stack.map((tech) => (
