@@ -17,7 +17,7 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-const title = "Kyaw Paing Oo (Kelvin) | Full Stack Developer";
+const title = "Kyaw Paing Oo (Kevin) | Full Stack Developer";
 const description =
   "Full Stack Developer from Myanmar specializing in React, Node.js, .NET, and cloud services. Building scalable web applications as a digital nomad.";
 
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Kyaw Paing Oo" }],
   keywords: [
     "Kyaw Paing Oo",
-    "Kelvin",
+    "Kevin",
     "Full Stack Developer",
     "React Developer",
     "Node.js Developer",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     title,
     description,
     images: ["/og-image.png"],
-    siteName: "Kelvin Dev Portfolio",
+    siteName: "Kevin Dev Portfolio",
     locale: "en_US",
   },
   twitter: {
@@ -75,7 +75,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Kyaw Paing Oo",
-  alternateName: "Kelvin",
+  alternateName: "Kevin",
   url: "https://kyawpaingoo-dev.vercel.app",
   image: "/og-image.png",
   jobTitle: "Full Stack Developer",
