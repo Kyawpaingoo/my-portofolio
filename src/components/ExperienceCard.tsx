@@ -10,6 +10,7 @@ import {
 } from "motion/react";
 import { ExternalLink } from "lucide-react";
 import type { Experience } from "@/lib/data";
+import HighlightText from "./HighlightText";
 
 export default function ExperienceCard({
   experience,
@@ -68,7 +69,10 @@ export default function ExperienceCard({
           {experience.period}
         </p>
         <p className="mt-4 text-sm leading-relaxed text-text/90">
-          {experience.description}
+          <HighlightText
+            text={experience.description}
+            keywords={experience.keywords}
+          />
         </p>
       </div>
     </motion.article>

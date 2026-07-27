@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "motion/react";
 import { Github, Linkedin, Mail } from "lucide-react";
 import { profile } from "@/lib/data";
+import HighlightText from "./HighlightText";
 
 const container = {
   hidden: { opacity: 0 },
@@ -65,7 +66,10 @@ export default function Hero() {
             variants={item}
             className="max-w-2xl text-base text-text/90"
           >
-            {profile.tagline}
+            <HighlightText
+              text={profile.tagline}
+              keywords={profile.taglineKeywords}
+            />
           </motion.p>
 
           <motion.div
