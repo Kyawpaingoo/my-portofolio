@@ -8,9 +8,10 @@ import {
   useMotionValue,
   type Variants,
 } from "motion/react";
-import { ExternalLink } from "lucide-react";
-import type { Project } from "@/lib/data";
+import { ArrowRight, ExternalLink } from "lucide-react";
+import type { Project } from "@/lib/content";
 import HighlightText from "./HighlightText";
+import ProjectBadge from "./ProjectBadge";
 
 export default function ProjectCard({
   project,
@@ -34,7 +35,8 @@ export default function ProjectCard({
     <motion.article
       variants={variants}
       onMouseMove={handleMouseMove}
-      className="group relative overflow-hidden rounded-lg border border-border bg-surface p-6 transition-colors hover:border-borderStrong"
+      whileHover={{ y: -4 }}
+      className="group relative overflow-hidden rounded-xl border border-border bg-surface/90 p-6 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.6)] backdrop-blur transition-colors hover:border-borderStrong"
     >
       <Link
         href={`/projects/${project.slug}`}
@@ -49,16 +51,21 @@ export default function ProjectCard({
       />
 
       <div className="relative z-10 pointer-events-none">
-        <div className="flex flex-wrap items-start justify-between gap-2">
+        <ProjectBadge project={project} />
+        <div className="mt-3 flex flex-wrap items-start justify-between gap-2">
           <h3 className="text-xl font-semibold text-text transition-colors group-hover:text-accent">
             {project.title}
           </h3>
-          {project.githubUrl && (
+          {(project.liveUrl ?? project.githubUrl) && (
             <a
-              href={project.githubUrl}
+              href={project.liveUrl ?? project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`Open ${project.title} on GitHub`}
+              aria-label={
+                project.liveUrl
+                  ? `Visit ${project.title}`
+                  : `Open ${project.title} on GitHub`
+              }
               className="pointer-events-auto relative z-20 text-muted transition-colors hover:text-accent"
             >
               <ExternalLink size={18} />
@@ -81,6 +88,17 @@ export default function ProjectCard({
             </li>
           ))}
         </ul>
+        {/* Visual only: the card-wide Link above handles click and focus. */}
+        <span
+          aria-hidden="true"
+          className="mt-5 inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 font-mono text-xs text-text transition-colors group-hover:border-accent group-hover:text-accent"
+        >
+          view details
+          <ArrowRight
+            size={14}
+            className="transition-transform group-hover:translate-x-0.5"
+          />
+        </span>
       </div>
     </motion.article>
   );

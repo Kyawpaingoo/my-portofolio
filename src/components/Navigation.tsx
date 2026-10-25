@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import { Menu, X } from "lucide-react";
 
@@ -8,6 +9,7 @@ const links = [
   { href: "/#home", label: "home" },
   { href: "/#experience", label: "experience" },
   { href: "/#projects", label: "projects" },
+  { href: "/#stack", label: "stack" },
   { href: "/#contact", label: "contact" },
 ];
 
@@ -16,24 +18,24 @@ export default function Navigation() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-bg/80 backdrop-blur">
-      <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-        <a
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+        <Link
           href="/#home"
           onClick={() => setIsOpen(false)}
           className="font-mono text-sm font-semibold text-accent"
         >
           kevin.dev
-        </a>
+        </Link>
 
         <ul className="hidden items-center gap-6 font-mono text-sm text-muted md:flex">
           {links.map((link) => (
             <li key={link.href}>
-              <a
+              <Link
                 href={link.href}
                 className="transition-colors hover:text-text"
               >
                 {link.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
@@ -60,13 +62,13 @@ export default function Navigation() {
           >
             {links.map((link) => (
               <li key={link.href}>
-                <a
+                <Link
                   href={link.href}
                   onClick={() => setIsOpen(false)}
                   className="block px-6 py-3 transition-colors hover:bg-surface hover:text-text"
                 >
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
           </motion.ul>

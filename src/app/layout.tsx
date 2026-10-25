@@ -1,8 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
-import CursorDotGlow from "@/components/CursorDotGlow";
+import { getProfile, getSiteSettings } from "@/lib/content";
+import { socialImageUrl } from "@/lib/media";
 import "./globals.css";
 
 const inter = Inter({
@@ -17,86 +16,54 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-const title = "Kyaw Paing Oo (Kevin) | Full Stack Developer";
-const description =
-  "Full Stack Developer from Myanmar specializing in React, Node.js, .NET, and cloud services. Building scalable web applications as a digital nomad.";
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://kyawpaingoo-dev.vercel.app"),
-  title,
-  description,
-  authors: [{ name: "Kyaw Paing Oo" }],
-  keywords: [
-    "Kyaw Paing Oo",
-    "Kevin",
-    "Full Stack Developer",
-    "React Developer",
-    "Node.js Developer",
-    ".NET Developer",
-    "Web Developer",
-    "Myanmar Developer",
-    "Digital Nomad",
-    "Portfolio",
-    "TypeScript",
-    "JavaScript",
-  ],
-  robots: { index: true, follow: true },
-  alternates: { canonical: "/" },
-  openGraph: {
-    type: "website",
-    url: "https://kyawpaingoo-dev.vercel.app/",
+export async function generateMetadata(): Promise<Metadata> {
+  const [settings, profile] = await Promise.all([
+    getSiteSettings(),
+    getProfile(),
+  ]);
+  const { title, description } = settings;
+  // Social cards: 1200×630 crop of the share image (or the profile photo).
+  const source = settings.ogImageUrl ?? profile.imageUrl;
+  const image = source ? socialImageUrl(source) : undefined;
+  const images = image ? [image] : undefined;
+
+  return {
+    metadataBase: new URL(settings.siteUrl),
     title,
     description,
-    images: ["/og-image.png"],
-    siteName: "Kevin Dev Portfolio",
-    locale: "en_US",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title,
-    description,
-    images: ["/og-image.png"],
-  },
-  icons: {
-    icon: [
-      { url: "/icons/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-      { url: "/icons/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-    ],
-    apple: "/icons/apple-touch-icon.png",
-  },
-  manifest: "/site.webmanifest",
-};
+    authors: [{ name: profile.fullName }],
+    keywords: settings.keywords,
+    robots: { index: true, follow: true },
+    alternates: { canonical: "/" },
+    openGraph: {
+      type: "website",
+      url: "/",
+      title,
+      description,
+      images,
+      siteName: settings.siteName,
+      locale: "en_US",
+    },
+    twitter: {
+      card: images ? "summary_large_image" : "summary",
+      title,
+      description,
+      images,
+    },
+    icons: {
+      icon: [
+        { url: "/icons/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+        { url: "/icons/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      ],
+      apple: "/icons/apple-touch-icon.png",
+    },
+    manifest: "/site.webmanifest",
+  };
+}
 
 export const viewport: Viewport = {
   themeColor: "#0d1117",
-};
-
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Kyaw Paing Oo",
-  alternateName: "Kevin",
-  url: "https://kyawpaingoo-dev.vercel.app",
-  image: "/og-image.png",
-  jobTitle: "Full Stack Developer",
-  worksFor: {
-    "@type": "Organization",
-    name: "Freelance",
-  },
-  sameAs: [
-    "https://github.com/Kyawpaingoo",
-    "https://www.linkedin.com/in/kyaw-paing-oo-dev",
-  ],
-  knowsAbout: [
-    "React",
-    "Node.js",
-    ".NET",
-    "TypeScript",
-    "JavaScript",
-    "PostgreSQL",
-    "AWS",
-    "Docker",
-  ],
 };
 
 export default function RootLayout({
@@ -105,23 +72,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
-      <body>
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-accent focus:px-4 focus:py-2 focus:text-bg"
-        >
-          Skip to content
-        </a>
-        <CursorDotGlow />
-        <Navigation />
-        {children}
-        <Footer />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-      </body>
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={`${inter.variable} ${jetbrainsMono.variable}`}
+    >
+      <body>{children}</body>
     </html>
   );
 }

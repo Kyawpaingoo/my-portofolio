@@ -3,20 +3,27 @@
 import { useState, type FormEvent } from "react";
 import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
-import { profile } from "@/lib/data";
+import type { Profile } from "@/lib/content";
+import SectionHeader from "@/components/SectionHeader";
 
 type Status = "idle" | "sending" | "success" | "error";
 
-const metaRows = [
-  { label: "location", value: profile.location },
-  { label: "status", value: "available for remote work" },
-  { label: "stack", value: profile.stackShort },
-  { label: "github", value: profile.github, href: profile.github },
-  { label: "linkedin", value: profile.linkedin, href: profile.linkedin },
-  { label: "resume", value: "download PDF", href: profile.resumeUrl },
-];
+type MetaRow = { label: string; value?: string; href?: string };
 
-export default function Contact() {
+export default function Contact({ profile }: { profile: Profile }) {
+  const metaRows = (
+    [
+      { label: "location", value: profile.location },
+      { label: "status", value: "available for remote work" },
+      { label: "stack", value: profile.stackShort },
+      { label: "github", value: profile.github, href: profile.github },
+      { label: "linkedin", value: profile.linkedin, href: profile.linkedin },
+      profile.resumeUrl
+        ? { label: "resume", value: "download PDF", href: profile.resumeUrl }
+        : { label: "resume" },
+    ] satisfies MetaRow[]
+  ).filter((row): row is MetaRow & { value: string } => Boolean(row.value));
+
   const [status, setStatus] = useState<Status>("idle");
   const [formState, setFormState] = useState({
     name: "",
@@ -61,19 +68,27 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="dotted-bg border-t border-border">
-      <div className="mx-auto max-w-5xl px-6 py-24">
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
-          className="mb-8 font-mono text-sm text-accent/80"
-        >
-          03 · CONTACT
-        </motion.p>
+    <section
+      id="contact"
+      className="dotted-bg relative overflow-hidden border-t border-border"
+    >
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-32 bottom-0 h-80 w-80 rounded-full bg-accent/10 blur-3xl"
+      />
+      <div className="relative mx-auto max-w-7xl px-6 py-24">
+        <SectionHeader
+          index="04"
+          kicker="$ ./contact.sh"
+          title={
+            <>
+              Let&apos;s <span className="text-accent">build</span> together
+            </>
+          }
+          description="Have a product idea, a backend to scale, or a role to fill? My inbox is open."
+        />
 
-        <div className="grid gap-12 md:grid-cols-2">
+        <div className="mt-10 grid gap-12 md:grid-cols-2">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -115,7 +130,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="rounded-lg border border-border bg-surface p-6"
+            className="rounded-xl border border-border bg-surface/90 p-6 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.6)] backdrop-blur"
           >
             <form onSubmit={handleSubmit} className="flex flex-col gap-5">
               <label className="flex flex-col gap-2">

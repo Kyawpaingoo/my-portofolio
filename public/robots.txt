@@ -1,9 +1,0 @@
-# https://www.robotstxt.org/robotstxt.html
-User-agent: *
-Allow: /
-
-# Sitemap
-Sitemap: https://kyawpaingoo-dev.vercel.app/sitemap.xml
-
-# Crawl-delay for politeness (optional)
-Crawl-delay: 1

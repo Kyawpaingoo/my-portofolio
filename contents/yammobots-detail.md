@@ -1,7 +1,7 @@
 # Yammobots — Full-Stack Developer
 
 ### Description for the card
-Contributed to enterprise backend systems across SureBenefits (rewards & loyalty platform), Cinema, and CareMe — led the ASP.NET MVC → React + C# Web API migration and implemented concurrency control for high-volume transactions.
+Contributed to enterprise systems across SureBenefits (rewards & loyalty platform), CareMe, and CareMeNurse — led the ASP.NET MVC → Blazor + C# .NET API migration and implemented concurrency control for high-volume transactions.
 ---
 
 ### Detail page content
@@ -25,32 +25,50 @@ demo: concurrency, deployment reliability, and cross-team delivery.
 ## The Products
 
 ### SureBenefits
-A rewards, promotions, and customer loyalty platform. This is the product
-I've done the most architectural work on — including the migration
-described below and the concurrency work that keeps transactions
-consistent under load.
+**Role:** Mobile API + Admin CRM — C# .NET API + Blazor
+**Link:** https://xtrasure.store/pages/sure-benefits
 
-### Cinema
-A cinema management system — handling scheduling, seating, and
-transaction flows for cinema operations.
+A rewards, promotions, and customer loyalty platform — the product I've
+done the most architectural work on.
+
+- Cin7 integration
+- Firebase push notifications
+- Hangfire cron jobs
+- Concurrency control for transactions
+- KBZ Pay payment integration
+- Pre-order system
+- Azure Blob Storage
+- Two-factor authentication for the admin CRM
+- Role-based access control (RBAC) for the admin CRM
+- Real-time queue system with SignalR
+- UAT
 
 ### CareMe
-A clinic management platform — patient and appointment-adjacent workflows
-for healthcare operations.
+**Role:** Admin Dashboard — migrated ASP.NET to Blazor with .NET API
+**Link:** https://caremebot.com/
 
-*(Note: fill in one specific detail per product if you can share more —
-even one sentence on what each system actually does operationally will
-make this section feel less like a list and more like real context.)*
+A clinic management platform for healthcare operations.
+
+- Developed reporting features for patients, doctors, and inventory
+
+### CareMeNurse
+**Role:** Mobile API + Admin Panel
+**Link:** https://caremenurse.appstor.io/
+
+A nursing-care booking platform.
+
+- Developed and maintained patient appointment booking for nursing care
+- Developed nurse registration and verification
 
 ---
 
 ## Key Contributions
 
 - Developed and delivered enterprise-level backend systems for
-  **SureBenefits**, **CareMe**, and **Cinema** using C# .NET API
+  **SureBenefits**, **CareMe**, and **CareMeNurse** using C# .NET API
   integrated with Azure App Service and Azure Blob Storage.
 - Played a key role in upgrading the legacy ASP.NET MVC codebases into a
-  modern React frontend and C# Web API architecture — improving system
+  modern Blazor frontend and C# .NET API architecture — improving system
   scalability, maintainability, and reducing tight coupling.
 - Implemented optimistic concurrency control with row-versioning to
   prevent data conflicts during payment transactions for a high-volume
@@ -70,7 +88,8 @@ make this section feel less like a list and more like real context.)*
 
 **Backend:** C# .NET, ASP.NET Core Web API, Entity Framework Core
 **Cloud:** Azure App Service, Azure Blob Storage
-**Frontend:** React
+**Integrations:** SignalR, Hangfire, Firebase Cloud Messaging, Cin7, KBZ Pay
+**Frontend:** Blazor
 **Practices:** CI/CD pipelines, optimistic concurrency control, code review, architecture decision-making
 
 ---

@@ -1,10 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
-import { ArrowLeft, ExternalLink } from "lucide-react";
-import type { Experience } from "@/lib/data";
+import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
+import type { Experience } from "@/lib/content";
 import HighlightText from "./HighlightText";
 
 export default function ExperienceDetail({
@@ -12,6 +13,12 @@ export default function ExperienceDetail({
 }: {
   experience: Experience;
 }) {
+  // R2 objects can be missing (e.g. bucket recreated); hide mockups that
+  // fail to load instead of showing broken image boxes.
+  const [failed, setFailed] = useState<string[]>([]);
+  const mockups = (experience.mockups ?? []).filter(
+    (m) => !failed.includes(m.src),
+  );
   return (
     <section className="dotted-bg min-h-[calc(100vh-65px)]">
       <div className="mx-auto max-w-3xl px-6 py-20">
@@ -56,29 +63,39 @@ export default function ExperienceDetail({
             </div>
           )}
 
-          {experience.products && experience.products.length > 0 && (
+          {experience.projects && experience.projects.length > 0 && (
             <div className="mt-10">
               <h2 className="font-mono text-xs uppercase tracking-wide text-muted">
-                The Products
+                Products I Built
               </h2>
-              <div className="mt-4 grid gap-4 sm:grid-cols-3">
-                {experience.products.map((product) => (
-                  <div
-                    key={product.name}
-                    className="rounded-lg border border-border bg-surface p-4"
-                  >
-                    <p className="font-mono text-sm font-semibold text-accent">
-                      {product.name}
-                    </p>
-                    <p className="mt-2 text-sm leading-relaxed text-text/90">
-                      <HighlightText
-                        text={product.description}
-                        keywords={experience.keywords}
+              <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+                {experience.projects.map((project, i) => (
+                  <li key={project.slug}>
+                    <Link
+                      href={`/projects/${project.slug}`}
+                      className="group flex h-full items-start gap-3 rounded-lg border border-border bg-surface/90 p-4 transition-colors hover:border-accent"
+                    >
+                      <span className="mt-0.5 font-mono text-xs text-accent/70">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="block font-semibold text-text transition-colors group-hover:text-accent">
+                          {project.title}
+                        </span>
+                        {project.category && (
+                          <span className="mt-0.5 block font-mono text-xs text-muted">
+                            {project.category}
+                          </span>
+                        )}
+                      </span>
+                      <ArrowRight
+                        size={16}
+                        className="mt-0.5 shrink-0 text-muted transition-all group-hover:translate-x-0.5 group-hover:text-accent"
                       />
-                    </p>
-                  </div>
+                    </Link>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
           )}
 
@@ -138,13 +155,13 @@ export default function ExperienceDetail({
             </div>
           )}
 
-          {experience.mockups && experience.mockups.length > 0 && (
+          {mockups.length > 0 && (
             <div className="mt-10">
               <h2 className="font-mono text-xs uppercase tracking-wide text-muted">
                 Product Preview
               </h2>
               <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3">
-                {experience.mockups.map((mockup) => (
+                {mockups.map((mockup) => (
                   <div
                     key={mockup.src}
                     className="relative aspect-[1206/2622] overflow-hidden rounded-2xl border border-border bg-surface p-2"
@@ -155,6 +172,13 @@ export default function ExperienceDetail({
                       fill
                       sizes="(min-width: 640px) 33vw, 50vw"
                       className="object-contain"
+                      onError={() =>
+                        setFailed((prev) =>
+                          prev.includes(mockup.src)
+                            ? prev
+                            : [...prev, mockup.src],
+                        )
+                      }
                     />
                   </div>
                 ))}

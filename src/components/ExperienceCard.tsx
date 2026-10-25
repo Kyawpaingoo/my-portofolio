@@ -8,8 +8,8 @@ import {
   useMotionValue,
   type Variants,
 } from "motion/react";
-import { ExternalLink } from "lucide-react";
-import type { Experience } from "@/lib/data";
+import { ArrowRight, ExternalLink } from "lucide-react";
+import type { Experience } from "@/lib/content";
 import HighlightText from "./HighlightText";
 
 export default function ExperienceCard({
@@ -34,7 +34,8 @@ export default function ExperienceCard({
     <motion.article
       variants={variants}
       onMouseMove={handleMouseMove}
-      className="group relative overflow-hidden rounded-lg border border-border bg-surface p-6 transition-colors hover:border-borderStrong"
+      whileHover={{ y: -4 }}
+      className="group relative overflow-hidden rounded-xl border border-border bg-surface/90 p-6 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.6)] backdrop-blur transition-colors hover:border-borderStrong"
     >
       <Link
         href={`/experience/${experience.slug}`}
@@ -74,6 +75,17 @@ export default function ExperienceCard({
             keywords={experience.keywords}
           />
         </p>
+        {/* Visual only: the card-wide Link above handles click and focus. */}
+        <span
+          aria-hidden="true"
+          className="mt-5 inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 font-mono text-xs text-text transition-colors group-hover:border-accent group-hover:text-accent"
+        >
+          view details
+          <ArrowRight
+            size={14}
+            className="transition-transform group-hover:translate-x-0.5"
+          />
+        </span>
       </div>
     </motion.article>
   );

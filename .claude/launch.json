@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "next-dev",
+      "runtimeExecutable": "bun",
+      "runtimeArgs": ["run", "dev"],
+      "port": 3000
+    },
+    {
+      "name": "cf-preview",
+      "runtimeExecutable": "bun",
+      "runtimeArgs": ["run", "preview"],
+      "port": 8787
+    }
+  ]
+}

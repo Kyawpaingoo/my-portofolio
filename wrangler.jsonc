@@ -1,0 +1,35 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "portfolio-web",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-09-25",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "services": [
+    {
+      // Lets the worker call itself (used internally by OpenNext).
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "portfolio-web"
+    }
+  ],
+  // Uploaded images and files (served by /media/[...key], uploaded from the
+  // Studio via /studio/api/upload). Never used for caches. `remote` makes
+  // `bun run dev`/`preview` use the real bucket too.
+  "r2_buckets": [
+    {
+      "binding": "MEDIA_BUCKET",
+      "bucket_name": "portfolio-web-media",
+      "remote": true
+    }
+  ],
+  // Cloudflare Images resizes media for next/image (see /media/[...key]).
+  "images": {
+    "binding": "IMAGES"
+  },
+  "observability": {
+    "enabled": true
+  }
+}
