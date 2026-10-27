@@ -67,14 +67,19 @@ export default function Hero({ profile }: HeroProps) {
             </motion.div>
 
             <motion.p variants={item} className="font-mono text-sm text-accent">
-              $ hi, I&apos;m
+              $ Hi, I&apos;m
             </motion.p>
 
             <motion.h1
               variants={item}
-              className="text-6xl font-black tracking-tight text-text sm:text-7xl"
+              className="text-4xl font-black tracking-tight text-text min-[400px]:text-5xl sm:text-6xl"
             >
-              {profile.name}
+              {profile.fullName}
+              {profile.name !== profile.fullName && (
+                <span className="mt-2 block text-2xl text-accent min-[400px]:text-3xl sm:text-4xl">
+                  ({profile.name})
+                </span>
+              )}
             </motion.h1>
 
             <motion.p variants={item} className="text-lg text-muted">

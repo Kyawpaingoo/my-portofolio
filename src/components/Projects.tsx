@@ -35,7 +35,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
       />
       <div className="relative mx-auto max-w-7xl px-6 py-20">
         <SectionHeader
-          index="02"
+          index="03"
           kicker="$ ls projects/"
           title={
             <>

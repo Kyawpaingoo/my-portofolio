@@ -158,7 +158,7 @@ export default function TechStack({
       />
       <div className="relative mx-auto max-w-7xl px-6 py-20">
         <SectionHeader
-          index="03"
+          index="04"
           kicker="$ stack --list"
           title={
             <>

@@ -4,7 +4,7 @@ import { FILE_TYPES, IMAGE_TYPES, MAX_UPLOAD_BYTES } from "@/lib/media";
 
 /**
  * Studio upload endpoint: stores an image or PDF in R2 (MEDIA_BUCKET) and
- * returns its key. Protected by the /studio Basic Auth in src/middleware.ts.
+ * returns its key. Protected by the /studio Cloudflare Access check in src/proxy.ts.
  * Keys are content hashes, so re-uploading the same file is a no-op.
  */
 
@@ -20,8 +20,8 @@ export type UploadResult = {
 };
 
 export async function POST(request: Request) {
-  // Browsers can attach cached Basic Auth credentials to cross-site requests,
-  // so only accept uploads from the Studio's own origin (CSRF).
+  // Browsers attach the Access cookie to cross-site requests too, so only
+  // accept uploads from the Studio's own origin (CSRF).
   if (request.headers.get("origin") !== new URL(request.url).origin) {
     return new Response("Cross-origin upload rejected", { status: 403 });
   }

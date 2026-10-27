@@ -1,6 +1,7 @@
 import { mediaUrl } from "@/lib/media";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import {
+  ABOUT_QUERY,
   EXPERIENCE_BY_SLUG_QUERY,
   EXPERIENCES_QUERY,
   PROFILE_QUERY,
@@ -30,6 +31,23 @@ export type Profile = {
   imageUrl?: string;
   imageAlt: string;
   resumeUrl?: string;
+};
+
+export type About = {
+  /** Story paragraphs, split on blank lines. */
+  story: string[];
+  storyKeywords: string[];
+  workStyle: string[];
+  facts: { label: string; value: string }[];
+  education: {
+    credential: string;
+    school: string;
+    location?: string;
+    period?: string;
+    note?: string;
+  }[];
+  interests: string[];
+  photos: (MockupImage & { caption?: string })[];
 };
 
 export type SiteSettings = {
@@ -118,6 +136,42 @@ export async function getProfile(): Promise<Profile> {
     imageUrl: data.imageKey ? mediaUrl(data.imageKey) : undefined,
     imageAlt: data.imageAlt ?? data.fullName,
     resumeUrl: data.resumeKey ? mediaUrl(data.resumeKey) : undefined,
+  };
+}
+
+/** `undefined` until the Studio's About document is created. */
+export async function getAbout(): Promise<About | undefined> {
+  const data = await sanityFetch({ query: ABOUT_QUERY });
+  if (!data) return undefined;
+
+  return {
+    story: data.story
+      .split(/\n\s*\n/)
+      .map((paragraph) => paragraph.trim())
+      .filter(Boolean),
+    storyKeywords: data.storyKeywords,
+    workStyle: data.workStyle,
+    facts: data.facts,
+    education: data.education.map((item) => ({
+      ...item,
+      location: opt(item.location),
+      period: opt(item.period),
+      note: opt(item.note),
+    })),
+    interests: data.interests,
+    photos: data.photos.flatMap((photo) =>
+      photo.key
+        ? [
+            {
+              src: mediaUrl(photo.key),
+              alt: photo.alt,
+              width: opt(photo.width),
+              height: opt(photo.height),
+              caption: opt(photo.caption),
+            },
+          ]
+        : []
+    ),
   };
 }
 

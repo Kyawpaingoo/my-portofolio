@@ -39,7 +39,7 @@ export default function Experience({
       />
       <div className="relative mx-auto max-w-7xl px-6 py-20">
         <SectionHeader
-          index="01"
+          index="02"
           kicker="$ cat experience.log"
           title={
             <>

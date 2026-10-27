@@ -152,6 +152,39 @@ export type SiteSettings = {
   knowsAbout?: Array<string>;
 };
 
+export type About = {
+  _id: string;
+  _type: "about";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  story: string;
+  storyKeywords?: Array<string>;
+  workStyle?: Array<string>;
+  facts?: Array<{
+    label: string;
+    value: string;
+    _type: "fact";
+    _key: string;
+  }>;
+  education?: Array<{
+    credential: string;
+    school: string;
+    location?: string;
+    period?: string;
+    note?: string;
+    _type: "educationItem";
+    _key: string;
+  }>;
+  interests?: Array<string>;
+  photos?: Array<{
+    image: R2Image;
+    caption?: string;
+    _type: "galleryPhoto";
+    _key: string;
+  }>;
+};
+
 export type Profile = {
   _id: string;
   _type: "profile";
@@ -295,6 +328,7 @@ export type AllSanitySchemaTypes =
   | Experience
   | TechStack
   | SiteSettings
+  | About
   | Profile
   | SanityImagePaletteSwatch
   | SanityImagePalette
@@ -324,6 +358,40 @@ export type PROFILE_QUERY_RESULT = {
   imageKey: string | null;
   imageAlt: string | null;
   resumeKey: string | null;
+} | null;
+
+// Source: src/sanity/queries.ts
+// Variable: ABOUT_QUERY
+// Query: *[_type == "about" && _id == "about"][0]{  story,  "storyKeywords": coalesce(storyKeywords, []),  "workStyle": coalesce(workStyle, []),  "facts": coalesce(facts[]{ label, value }, []),  "education": coalesce(education[]{ credential, school, location, period, note }, []),  "interests": coalesce(interests, []),  "photos": coalesce(photos[defined(image.key)]{    caption,    "key": image.key,    "alt": image.alt,    "width": image.width,    "height": image.height  }, [])}
+export type ABOUT_QUERY_RESULT = {
+  story: string;
+  storyKeywords: Array<string> | Array<never>;
+  workStyle: Array<string> | Array<never>;
+  facts:
+    | Array<{
+        label: string;
+        value: string;
+      }>
+    | Array<never>;
+  education:
+    | Array<{
+        credential: string;
+        school: string;
+        location: string | null;
+        period: string | null;
+        note: string | null;
+      }>
+    | Array<never>;
+  interests: Array<string> | Array<never>;
+  photos:
+    | Array<{
+        caption: string | null;
+        key: string | null;
+        alt: string;
+        width: number | null;
+        height: number | null;
+      }>
+    | Array<never>;
 } | null;
 
 // Source: src/sanity/queries.ts
@@ -481,6 +549,7 @@ export type SITEMAP_QUERY_RESULT = {
 declare global {
   interface SanityQueries {
     '*[_type == "profile" && _id == "profile"][0]{\n  name,\n  fullName,\n  role,\n  location,\n  stackShort,\n  tagline,\n  "taglineKeywords": coalesce(taglineKeywords, []),\n  email,\n  github,\n  linkedin,\n  "imageKey": image.key,\n  "imageAlt": image.alt,\n  "resumeKey": resume.key\n}': PROFILE_QUERY_RESULT;
+    '*[_type == "about" && _id == "about"][0]{\n  story,\n  "storyKeywords": coalesce(storyKeywords, []),\n  "workStyle": coalesce(workStyle, []),\n  "facts": coalesce(facts[]{ label, value }, []),\n  "education": coalesce(education[]{ credential, school, location, period, note }, []),\n  "interests": coalesce(interests, []),\n  "photos": coalesce(photos[defined(image.key)]{\n    caption,\n    "key": image.key,\n    "alt": image.alt,\n    "width": image.width,\n    "height": image.height\n  }, [])\n}': ABOUT_QUERY_RESULT;
     '*[_type == "siteSettings" && _id == "siteSettings"][0]{\n  title,\n  description,\n  siteUrl,\n  siteName,\n  "keywords": coalesce(keywords, []),\n  "ogImageKey": ogImage.key,\n  jobTitle,\n  worksFor,\n  "knowsAbout": coalesce(knowsAbout, [])\n}': SITE_SETTINGS_QUERY_RESULT;
     '*[_type == "techStack" && _id == "techStack"][0]{\n  "groups": coalesce(groups[]{\n    name,\n    kicker,\n    icon,\n    "items": coalesce(items, [])\n  }, [])\n}': TECH_STACK_QUERY_RESULT;
     '*[_type == "project" && defined(slug.current)] | order(order asc){\n  "slug": slug.current,\n  title,\n  "kind": coalesce(kind, "personal"),\n  category,\n  description,\n  "stack": coalesce(stack, []),\n  "highlights": coalesce(highlights, []),\n  "keywords": coalesce(keywords, []),\n  githubUrl,\n  liveUrl,\n  "experience": *[_type == "experience" && references(^._id)][0]{ "slug": slug.current, org }\n}': PROJECTS_QUERY_RESULT;

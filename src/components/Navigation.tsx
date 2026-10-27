@@ -7,6 +7,7 @@ import { Menu, X } from "lucide-react";
 
 const links = [
   { href: "/#home", label: "home" },
+  { href: "/#about", label: "about" },
   { href: "/#experience", label: "experience" },
   { href: "/#projects", label: "projects" },
   { href: "/#stack", label: "stack" },
@@ -24,7 +25,7 @@ export default function Navigation() {
           onClick={() => setIsOpen(false)}
           className="font-mono text-sm font-semibold text-accent"
         >
-          kevin.dev
+          kyawpaingoo.dev
         </Link>
 
         <ul className="hidden items-center gap-6 font-mono text-sm text-muted md:flex">

@@ -78,7 +78,7 @@ export default function Contact({ profile }: { profile: Profile }) {
       />
       <div className="relative mx-auto max-w-7xl px-6 py-24">
         <SectionHeader
-          index="04"
+          index="05"
           kicker="$ ./contact.sh"
           title={
             <>

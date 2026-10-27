@@ -21,6 +21,22 @@ export const PROFILE_QUERY = defineQuery(`*[_type == "profile" && _id == "profil
   "resumeKey": resume.key
 }`);
 
+export const ABOUT_QUERY = defineQuery(`*[_type == "about" && _id == "about"][0]{
+  story,
+  "storyKeywords": coalesce(storyKeywords, []),
+  "workStyle": coalesce(workStyle, []),
+  "facts": coalesce(facts[]{ label, value }, []),
+  "education": coalesce(education[]{ credential, school, location, period, note }, []),
+  "interests": coalesce(interests, []),
+  "photos": coalesce(photos[defined(image.key)]{
+    caption,
+    "key": image.key,
+    "alt": image.alt,
+    "width": image.width,
+    "height": image.height
+  }, [])
+}`);
+
 export const SITE_SETTINGS_QUERY = defineQuery(`*[_type == "siteSettings" && _id == "siteSettings"][0]{
   title,
   description,

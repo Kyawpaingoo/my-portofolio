@@ -1,3 +1,6 @@
 NEXTJS_ENV=development
-STUDIO_BASIC_AUTH_USER=
-STUDIO_BASIC_AUTH_PASSWORD=
+# /studio Cloudflare Access (see src/lib/studio-access.ts). Not needed for
+# `bun run dev`, which skips the check on localhost.
+CF_ACCESS_TEAM_DOMAIN=
+CF_ACCESS_AUD=
+STUDIO_ALLOWED_EMAILS=you@gmail.com

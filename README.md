@@ -1,7 +1,7 @@
 # Kevin Dev Portfolio
 
 Personal portfolio for Kyaw Paing Oo (Kevin), live at
-https://portfolio-web.paingookyaw624.workers.dev. The content is managed in
+https://kyawpaingoo.dev. The content is managed in
 [Sanity](https://www.sanity.io), rendered with Next.js, and deployed to
 Cloudflare Workers.
 
@@ -27,17 +27,27 @@ http://localhost:3000/studio.
 
 ### Studio access
 
-`/studio` is protected by HTTP Basic Auth (`src/middleware.ts`), in addition
-to Sanity's own login. The credentials are `STUDIO_BASIC_AUTH_USER` and
-`STUDIO_BASIC_AUTH_PASSWORD`:
+`/studio` is protected by Cloudflare Access, limited to an email allowlist,
+in addition to Sanity's own login. Access signs you in; `src/proxy.ts`
+(`src/lib/studio-access.ts`) then checks the token Access adds to each request
+(`Cf-Access-Jwt-Assertion`), so requests that bypass Access are rejected.
 
-- locally (`bun run dev` / `bun run preview`): in `.dev.vars`
-- production: Worker secrets (same values as your local `.dev.vars`)
+Access can protect a single path only on a domain that is an active zone in
+your Cloudflare account: add a self-hosted Access application for
+`<domain>/studio*` (Zero Trust → Access → Applications) with an Allow policy
+for your email. On `workers.dev`, Access can only protect the whole URL.
 
-Never put them in `.env*` files: OpenNext bundles those into the Worker. To
-rotate the password, update `.dev.vars` and run
-`bunx wrangler secret put STUDIO_BASIC_AUTH_PASSWORD` (it prompts for the
-value). If the secrets are missing, the Studio stays locked.
+Worker secrets (`bunx wrangler secret put <NAME>`):
+
+| Variable | Value |
+| --- | --- |
+| `CF_ACCESS_TEAM_DOMAIN` | `https://<team>.cloudflareaccess.com` (Zero Trust → Settings → Team name) |
+| `CF_ACCESS_AUD` | The Access application's Application Audience (AUD) tag |
+| `STUDIO_ALLOWED_EMAILS` | Comma-separated emails allowed in (also enforced by the Access policy) |
+
+`bun run dev` skips the check on localhost; `bun run preview` doesn't, so
+the Studio is locked there unless requests carry a real Access token. If any
+secret is missing in production, the Studio stays locked.
 
 To log in to the Studio locally, the origin must be allowed in Sanity
 (sanity.io/manage → API → CORS origins, with credentials), or from the CLI:
